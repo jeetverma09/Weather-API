@@ -1,11 +1,63 @@
-In this project, instead of relying on our own weather data, we will build a weather API that fetches and returns weather data from a 3rd party API. This project will help you understand how to work with 3rd party APIs, caching, and environment variables.
-
 Weather API
+This project is a simple Weather API built with Node.js that fetches weather data from a third-party API (Visual Crossing) and implements in-memory caching using Redis. The purpose of this project is to demonstrate how to work with third-party APIs, caching mechanisms, and environment variables.
 
-As for the actual weather API to use, you can use your favorite one, as a suggestion, here is a link to Visual Crossing’s API, it’s completely FREE and easy to use.
+Table of Contents:
 
-Regarding the in-memory cache, a pretty common recommendation is to use Redis, you can read more about it here, and as a recommendation, you could use the city code entered by the user as the key, and save there the result from calling the API.
+Introduction
+Features
+Prerequisites
+Installation
+Usage
+API Endpoints
+Environment Variables
+Technologies Used
+License
+Introduction:
+This Weather API allows users to fetch current weather data for a specified city by interacting with a third-party API (Visual Crossing). The results are cached in Redis, reducing the number of API requests and improving the performance of the API. Cached data is automatically expired after a set period, ensuring that outdated information is not served to users.
 
-At the same time, when you “set” the value in the cache, you can also give it an expiration time in seconds (using the EX flag on the SET command). That way the cache (the keys) will automatically clean itself when the data is old enough (for example, giving it a 12-hours expiration time).
+Features:
+
+Fetches weather data from the Visual Crossing API.
+Implements in-memory caching with Redis to optimize performance.
+Supports environment variables for API keys and Redis configuration.
+Automatically expires cached data after 12 hours.
+Error handling for invalid city codes and third-party API failures.
+Prerequisites:
+
+Node.js: Ensure that Node.js is installed on your machine.
+Redis: Make sure Redis is installed and running.
+Git: For cloning the repository and version control.
+Installation:
+
+Clone the Repository: Use Git to clone the repository to your local machine and navigate into the project directory.
+Install Dependencies: Install the necessary dependencies using npm.
+Set Up Environment Variables: Create a .env file in the root directory and add the required environment variables, including the Visual Crossing API key and Redis connection details.
+Run the Server: Start the server and it should be running on http://localhost:3000.
+Usage:
+To fetch weather data for a specific city, make a GET request to the /weather/:city endpoint, replacing :city with the name of the city for which you want to retrieve the weather data.
+
+Example Response:
+A typical response will include weather data such as temperature, humidity, wind speed, and conditions, along with the source of the data (either "api" for a fresh API request or "cache" for cached data).
+
+API Endpoints:
+
+GET /weather/:city: Fetches the current weather data for the specified city. The city name is passed as a URL parameter.
+
+Environment Variables:
+The project uses the following environment variables:
+
+WEATHER_API_KEY: The API key for the Visual Crossing weather API.
+REDIS_HOST: The host address for the Redis server (default is 127.0.0.1).
+REDIS_PORT: The port number for the Redis server (default is 6379).
+
+Technologies Used:
+
+Node.js: JavaScript runtime environment.
+Express.js: Web framework for Node.js.
+Axios: Promise-based HTTP client for making API requests.
+Redis: In-memory data structure store used for caching.
+Dotenv: Module for loading environment variables from a .env file.
+License:
+This project is licensed under the MIT License.
 
 Project Url :- https://roadmap.sh/projects/weather-api-wrapper-service
